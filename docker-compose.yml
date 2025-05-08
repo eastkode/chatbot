@@ -1,0 +1,17 @@
+services:
+  frontend:
+    build: ./frontend
+    ports:
+      - "5002:80"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./backend
+      args:
+        OPENAI_API_KEY: ${OPENAI_API_KEY}
+    ports:
+      - "5001:5001"
+    environment:
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
